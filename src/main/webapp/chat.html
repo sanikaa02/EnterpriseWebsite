@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Chat Container */
+        .chat-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            border-radius: 8px;
+            background: #f9f9f9;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Chat Header */
+        .chat-header {
+            background: #003366; /* Dark Blue */
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Exit Button */
+        .exit-btn {
+            background: white;
+            color: #003366;
+            padding: 5px 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .exit-btn:hover {
+            background: #ddd;
+        }
+
+        /* Chat Body */
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        /* FAQ Button */
+        .faq-btn {
+            display: block;
+            width: 90%;
+            padding: 8px;
+            margin: 5px auto;
+            border: none;
+            background: #003366; /* Dark Blue */
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .faq-btn:hover {
+            background: #002244; /* Slightly darker Blue */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            Sai Enterprise Chatbot ✨
+            <button class="exit-btn" onclick="exitChat()">Exit</button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <p><strong>Bot:</strong> Hello! Click on a question below to get an answer.</p>
+
+            <!-- FAQ Buttons -->
+            <button class="faq-btn" onclick="sendMessage('what is sai enterprise')">What is Sai Enterprise?</button>
+            <button class="faq-btn" onclick="sendMessage('what services do you offer')">What services do you offer?</button>
+            <button class="faq-btn" onclick="sendMessage('where are you located')">Where are you located?</button>
+            <button class="faq-btn" onclick="sendMessage('how can i contact you')">How can I contact you?</button>
+            <button class="faq-btn" onclick="sendMessage('what are your working hours')">What are your working hours?</button>
+        </div>
+    </div>
+
+    <script>
+        const faq = {
+            "what is sai enterprise": "Sai Enterprise provides high-quality industrial and commercial solutions.",
+            "what services do you offer": "We offer industrial equipment sales, maintenance, and consulting services.",
+            "where are you located": "Near Sinhagad road,Lane no:20,Dhayari,Pune-411041.",
+            "how can i contact you": "You can contact us via email at info@sai-enterprise.com or call +91 9998887776.",
+            "what are your working hours": "Our working hours are Monday to Saturday, 9 AM - 6 PM."
+        };
+
+        function sendMessage(question) {
+            let chatBody = document.getElementById("chatBody");
+            chatBody.innerHTML += `<p><strong>You:</strong> ${question}</p>`;
+
+            let response = faq[question] || "I'm sorry, I don't have an answer to that. Please contact support.";
+
+            setTimeout(() => {
+                chatBody.innerHTML += `<p><strong>Bot:</strong> ${response}</p>`;
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 500);
+        }
+
+        function exitChat() {
+            parent.closeChat(); // Call function from index.html to close chatbot and show chat icon again
+        }
+    </script>
+
+</body>
+</html>
